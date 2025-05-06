@@ -13,13 +13,20 @@ We cleaned and analyzed a multi-season dataset of NBA player statistics using R.
 
 ### Interesting Insight
 
-One of the most compelling findings was that height does not strongly correlate with scoring. In fact, many of the league’s top scorers fall within a moderate height range—between 6’3” and 6’7”. These players, often guards or wing players, tend to have more offensive control and scoring opportunities.
+One of the most compelling findings was that height does not strongly correlate with scoring. In fact, many of the league’s top scorers fall within a moderate height range, between 6’3” and 6’7”. These players, often guards or wing players, tend to have more offensive control and scoring opportunities.
 Additionally, players peak in scoring between the ages of 26 and 28, highlighting a blend of physical prime and in-game maturity.
 Below is a heatmap that visualizes the scoring “sweet spot” across both height and age:
 
 ## Repo Structure
 
-Use this section to explain the structure of your repo. This should help visitors quickly figure out where they should look to find certain elements. Further, you can use this space to highlight and briefly explain important/key files in the repo.
+This repository includes all components necessary to reproduce and review our STAT 184 Final Project analysis. Below is a description of each file:
+	•	nba_scoring_analysis_final.qmd – The main Quarto file containing our full analysis, including code, visuals, and narrative.
+	•	NBA Scoring Analysis.pdf – The final rendered PDF report for submission, generated from the .qmd file.
+	•	all_seasons.csv – The raw dataset used for the analysis, containing multi-season NBA player statistics.
+	•	README.md – This document, providing an overview of the project, repo structure, and key insights.
+	•	Project_Guidelines.md – A copy of the STAT 184 course project guidelines for easy reference.
+	•	.gitignore – Specifies files that should be ignored by Git to keep the repo clean.
+	•	apa7.csl / MLA9.csl – Citation style files that allow formatting references in either APA or MLA style when rendering the report.
 
 ## Data Sources and Acknowledgements
 
@@ -33,5 +40,5 @@ R Packages Used:
 
 ## Authors
 
-Varun Gullanki, Anirudh Ganesan, Zezhou Zhuang
+Varun Gullanki, Anirudh Ganesan, Zezhou Zhuang. 
 If you have further questions please contact vsg5067@psu.edu.
