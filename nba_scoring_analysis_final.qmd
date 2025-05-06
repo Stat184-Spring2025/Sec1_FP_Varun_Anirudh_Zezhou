@@ -1,0 +1,132 @@
+---
+title: "NBA Scoring Analysis"
+author: "Varun Gullanki, Anirudh Ganesan, Zezhou Zhuang"
+format: pdf
+editor: visual
+---
+
+## Introduction
+
+In professional basketball, player performance is influenced by a range of physical and experiential factors. This project explores how **height** and **age** relate to **scoring performance** in the NBA. We investigate the following questions:
+
+1.  Do taller players score more points?
+2.  At what age do players typically reach their scoring peak?
+3.  What combination of height and age is optimal for scoring?
+
+These insights can support coaches, analysts, and scouts in evaluating player potential and optimizing team composition.
+
+## Data Provenance
+
+The dataset was compiled and uploaded by Justinas to Kaggle. It contains statistics from multiple NBA seasons and includes variables such as player height, age, and points per game.Data source: Justinas. “NBA Players Data.” *Kaggle*, 2023, <https://www.kaggle.com/datasets/justinas/nba-players-data>. Accessed May 2025.
+
+## FAIR/CARE Principles
+
+-   **Findable**: Data is publicly available on a trusted open data platform.
+-   **Accessible**: Provided in a machine-readable format (CSV).
+-   **Interoperable**: Compatible with common tools such as R and Python.
+-   **Reusable**: Contains structured and labeled variables that allow for versatile analysis.
+
+## Summary Statistics
+
+To prepare the data for analysis, we first converted player height from centimeters to inches. Then we filtered out missing or zero point values to maintain analytical accuracy.
+
+Below is a summary of the cleaned dataset:
+
+```{r echo=FALSE}
+#| message: false
+#| warning: false
+#| paged-print: false
+library(tidyverse)
+nba <- read_csv("/Users/varun/Downloads/all_seasons.csv")
+nba_clean <- nba %>%
+  mutate(player_height = player_height * 0.393701) %>%
+  filter(!is.na(pts), !is.na(age), !is.na(player_height), pts > 0)
+
+# Select key variables for summary
+summary_data <- nba_clean %>%
+  select(age, player_height, pts)
+
+knitr::kable(summary(summary_data), caption = "Summary Statistics for Age, Height (in), and Points")
+```
+
+
+## Q1: Does Player Height Affect Scoring?
+
+```{r echo=FALSE}
+#| warning: false
+ggplot(nba_clean, aes(x = player_height, y = pts)) +
+  geom_point(alpha = 0.3, color = "darkgreen") +
+  geom_smooth(method = "lm", se = TRUE, color = "blue") +
+  labs(
+    title = "Player Height vs. Points Per Game",
+    x = "Player Height (inches)",
+    y = "Points Per Game"
+  )
+```
+
+**Interpretation**:\
+The scatterplot reveals a broad range of scoring outputs across different heights. While there is a slight upward trend, the weak correlation suggests that **height is not a strong predictor of scoring**. Role-specific factors (e.g., guards handling the ball more) may have a greater impact than height alone.
+
+
+## Q2: At What Age Do NBA Players Peak in Scoring?
+
+```{r echo=FALSE}
+#| warning: false
+age_avg_pts <- nba_clean %>%
+  group_by(age) %>%
+  summarize(mean_pts = mean(pts), count = n()) %>%
+  filter(count > 20)
+
+ggplot(age_avg_pts, aes(x = age, y = mean_pts)) +
+  geom_line(color = "firebrick", size = 1.3) +
+  geom_point(color = "black") +
+  labs(
+    title = "Average Points Per Game by Age",
+    x = "Age",
+    y = "Average Points Per Game"
+  )
+```
+
+**Interpretation**:\
+NBA players tend to improve their scoring output through their early 20s, peaking between **ages 26–28**. After this range, scoring declines — likely due to factors such as reduced athleticism, injuries, or changes in team role.
+
+
+## Q3: What Is the Optimal Height/Age for Scoring?
+
+```{r echo=FALSE}
+nba_grid <- nba_clean %>%
+  group_by(age, player_height) %>%
+  summarize(mean_pts = mean(pts), .groups = "drop")
+
+ggplot(nba_grid, aes(x = player_height, y = age, fill = mean_pts)) +
+  geom_tile() +
+  labs(
+    title = "Optimal Height and Age for Scoring",
+    x = "Player Height (inches)",
+    y = "Age",
+    fill = "Avg Points"
+  )
+```
+
+**Interpretation**:\
+This heatmap shows that players between **75–79 inches** (roughly 6'3" to 6'7") and **ages 25–28** tend to average the most points per game. This region represents athletic and experienced guards and forwards — a valuable profile for high-scoring performance.
+
+
+## Data Visualization Summary
+
+We created three types of visualizations: - A **scatterplot** to analyze the height-to-scoring relationship. - A **line graph** to observe scoring trends across ages. - A **heatmap** to explore the intersection of height and age with scoring output.
+
+These plots collectively show that **experience and playing role outweigh raw height** when it comes to scoring in the NBA.
+
+## Conclusion
+
+-   **Height is not a major driver of scoring**. Players of all sizes can be high scorers depending on their role.
+-   **Age has a clear peak window** around 26–28 years, reflecting the balance of skill and physical condition.
+-   The best scoring performances occur in players with a combination of **moderate-to-tall height and mid-to-late 20s age**.
+
+This analysis emphasizes that player performance depends on multiple factors — not just physical measurements. Future research could control for player position, minutes played, or usage rate to refine these insights.
+
+## Code Appendix
+
+```{r codeAppend, ref.label=knitr::all_labels(), echo=TRUE, eval=FALSE}
+```
