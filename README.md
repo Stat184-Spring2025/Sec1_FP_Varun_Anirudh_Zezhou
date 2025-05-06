@@ -5,9 +5,9 @@ This project investigates how a player’s height and age impact their scoring p
 ## Overview
 
 In the NBA, scoring ability is a core metric used to assess player value, performance, and potential. However, it’s often assumed that taller players or younger, more athletic players naturally score more. This project challenges those assumptions by asking:
-	•	Do taller players actually score more points per game?
-	•	At what age are NBA players at their scoring peak?
-	•	Is there an optimal combination of height and age for maximizing scoring output?
+- Do taller players actually score more points per game?
+- At what age are NBA players in their scoring peak?
+- Is there an optimal combination of height and age for maximizing scoring output?
 
 We cleaned and analyzed a multi-season dataset of NBA player statistics using R. Through visualizations and statistical summaries, we drew evidence-based conclusions to these questions. The results help contextualize how physical traits (like height) and player development stages (like age) relate to actual on-court performance.
 
