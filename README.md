@@ -1,10 +1,10 @@
-# Project Title
+# NBA Scoring Analysis
 
-Write a 1-2 sentences that quickly and clearly convey what your repo is for.
+This project explores how NBA player height and age influence scoring performance, using a dataset of season-level stats. It aims to uncover performance trends that can inform coaching, scouting, and analytics strategies.
 
 ## Overview
 
-Expand on those introductory sentences with a brief but informative description of your project's purpose and goals. This section should help visitors decide whether they should dig deeper into your repo/project.
+The purpose of this analysis is to examine whether taller players score more points, identify the age range when players typically peak in scoring, and determine the optimal combination of height and age for maximizing scoring output in the NBA. We perform this analysis through data visualization and summary statistics using R, and communicate our findings in a reproducible .qmd report.
 
 ### Interesting Insight
 
